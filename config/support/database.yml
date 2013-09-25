@@ -1,0 +1,31 @@
+shared: &shared
+  adapter: mysql2
+  encoding: utf8
+  reconnect: true
+  pool: 5
+
+amazon: &amazon
+  <<: *shared
+  username: user
+  password: fair5count
+  host: main.cnfssaanjxye.us-east-1.rds.amazonaws.com
+
+development:
+  <<: *shared
+  database: <%= $globals.application.downcase %>_<%= $user %>_development
+  username: root
+  password: password
+
+production:
+  <<: *amazon
+  database: <%= $globals.application.downcase %>
+
+sandbox:
+  <<: *amazon
+  database: <%= $globals.application.downcase %>_<%= $user %>
+
+test:
+  <<: *shared
+  database: <%= $globals.application.downcase %>_<%= $user %>_test
+  username: root
+  password: password

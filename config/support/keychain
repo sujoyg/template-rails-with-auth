@@ -1,0 +1,25 @@
+<VirtualHost *:80>
+    ServerName <%= $globals.host %>
+    DocumentRoot <%= $globals.deployment.site.dir %>/current/public
+    PassengerRestartDir tmp/pids
+    RailsBaseURI /
+    RailsEnv <%= Rails.env %>
+
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride None
+    </Directory>
+    <Directory <%= $globals.deployment.site.dir %>/current/public/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Order allow,deny
+        allow from all
+    </Directory>
+</VirtualHost>
+
+<% if $globals.host.start_with? 'www' %>
+<VirtualHost *:80>
+  ServerName <%= $globals.host.gsub(/^www./, '') %>
+  Redirect permanent / http://<%= $globals.host %>/
+</VirtualHost>
+<% end %>

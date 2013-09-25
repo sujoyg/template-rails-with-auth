@@ -1,0 +1,14 @@
+= form_tag signup_path, id: 'signup_form' do
+  = label_tag :email, 'Your Email'
+  %br
+  = text_field_tag :email, params[:email]
+  %br
+  = label_tag :email_confirmation, 'Re-enter Email'
+  %br
+  = text_field_tag :email_confirmation
+  %br
+  = label_tag :password
+  %br
+  = password_field_tag :password
+  %br
+  = submit_tag 'Sign Up'

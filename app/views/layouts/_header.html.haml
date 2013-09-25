@@ -1,0 +1,5 @@
+#header
+  %div{style: 'margin: 0 auto; width: 982px;'}
+    - if current_user
+      %div{style: 'float: right; padding-top: 12px;'}
+        = link_to 'Logout', logout_path, style: 'color: white;'

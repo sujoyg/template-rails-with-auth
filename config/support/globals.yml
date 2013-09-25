@@ -1,0 +1,29 @@
+shared: &shared
+  application: $name;format="Camel"$
+  deployment: &deployment
+    dir: /mnt/deployment/$name;format="camel,lower"$
+    repository: git@github.com:sujoyg/$name;format="camel,lower"$.git
+    user: user
+  token: 7dfab5bbd04aed2e245b57163e29548b2530273d43707661b029ec959473310ae31b76dd64723c9a470e38531149d1b10987786af8731a63c77f6312c781c08
+
+development:
+  <<: *shared
+  host: localhost:3000
+
+production:
+  <<: *shared
+  deployment:
+    <<: *deployment
+    host: $name;format="camel;lower"$.cc
+  host: $name;format="camel;lower"$.cc
+
+sandbox:
+  <<: *shared
+  deployment:
+    <<: *deployment
+    host: <%= $user %>.i.$name;format="camel;lower"$.cc
+  host: <%= $user %>.i.$name;format="camel;lower"$.cc
+
+test:
+  <<: *shared
+  host: test.host

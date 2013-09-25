@@ -1,0 +1,7 @@
+- content_for :content do
+  = render partial: 'layouts/header'
+  - if flash[:alert]
+    %div{style: 'background-color: rgb(255, 200, 200);'}= flash[:alert]
+  %div{style: 'width: 1024px; margin: auto;'}
+    = yield
+= render template: 'layouts/base'
